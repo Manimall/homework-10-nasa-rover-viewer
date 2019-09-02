@@ -35,6 +35,7 @@ const RoversViewer = (props) => {
 		getPhotos(value);
 	}
 
+
 	return (
 		<div className={styles.root}>
 			<SelectSol {...sol} changeSol={changeSol}/>
@@ -49,6 +50,7 @@ const RoversViewer = (props) => {
 							key={item}
 							photos={currentPhotos}
 							name={item}
+							sol={sol}
 							isLoading={isLoading}
 						/>
 					)
