@@ -22,7 +22,7 @@ const styles = {
 
 class SelectSol extends PureComponent {
   state = {
-    sol: this.props.selectedSol // eslint-disable-line react/destructuring-assignment
+    sol: this.props.current // eslint-disable-line react/destructuring-assignment
   };
 
   constructor(props) {

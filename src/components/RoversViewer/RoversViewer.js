@@ -17,11 +17,10 @@ import styles from './RoversViewer.module.css';
 
 
 const RoversViewer = (props) => {
-	console.log(props);
+	// console.log(props);
 	const { fetchPhotosRequest, photos, sol, sol: { current }, } = props;
 
-	const getRoverNames = () => Object.keys(photos);
-	const rovers = getRoverNames();
+	const rovers = Object.keys(photos);
 
 	const getPhotos = (sol) => {
 		rovers.forEach(name => fetchPhotosRequest({name, sol}));
@@ -31,17 +30,27 @@ const RoversViewer = (props) => {
 		getPhotos(current);
 	}, []);
 
-	const changeSol = (value) => getPhotos(value);
+	const changeSol = (value) => {
+		if (value === current) return;
+		getPhotos(value);
+	}
 
 	return (
 		<div className={styles.root}>
 			<SelectSol {...sol} changeSol={changeSol}/>
 			<div className={styles.сontainer}>
 				{rovers.map(item => {
-					const currentPhotos = photos[item][current] ? photos[item][current].photos : [];
+					const photosData = photos[item][current];
+					const currentPhotos = photosData ? photosData.photos : [];
+					const isLoading = photosData && photosData.isLoading;
 
 					return (
-						<RoverPhotos key={item} photos={currentPhotos} name={item}/>
+						<RoverPhotos
+							key={item}
+							photos={currentPhotos}
+							name={item}
+							isLoading={isLoading}
+						/>
 					)
 				})}
 			</div>

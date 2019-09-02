@@ -37,7 +37,6 @@ const photos = handleActions({
 		return {
 			...state,
 			[name]: {
-				// ...state[name],
 				[sol]: fetchPhotosRequestObj,
 			}
 		}
@@ -48,11 +47,10 @@ const photos = handleActions({
 		return {
 			...state,
 			[name]: {
-				// ...state[name],
 				[sol]: {
-					isLoaded: true,
 					isLoading: false,
 					photos,
+					isLoaded: true,
 				}
 			}
 		}
@@ -63,11 +61,10 @@ const photos = handleActions({
 		return {
 			...state,
 			[name]: {
-				// ...state[name],
 				[sol]: {
+					isLoading: false,
 					photos: [],
 					isLoaded: true,
-					isLoading: false,
 					error,
 				}
 			}
