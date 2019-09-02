@@ -3,27 +3,30 @@ import {
   changeSol,
   fetchPhotosRequest,
   fetchPhotosSuccess,
-  fetchPhotosFailure
+  // fetchPhotosFailure
 } from './actions'
 
 const randomAction = {
   type: `RANDOM_ACTION_${parseInt(Math.random() * 1000, 10)}`
-}
+};
+
+const filters = ['curiosity', 'opportunity', 'spirit'];
 
 describe('Reducer RoverPhotos', () => {
-  const state0 = reducer(undefined, randomAction)
-  console.log(state0)
+  const state0 = reducer(undefined, randomAction);
+  console.log(state0);
 
   describe('action changeSol', () => {
     it('Меняет номер сола в sol.current', () => {
-      const testValue = 10
+      const testValue = 10;
       const state1 = reducer(state0, changeSol(testValue))
 
       expect(state1.sol.current).toBe(testValue)
     })
-  })
-  ;['curiosity', 'opportunity', 'spirit'].forEach(name => {
-    const sol = 10
+  });
+
+  filters.forEach(name => {
+    const sol = 10;
     const state1 = reducer(state0, fetchPhotosRequest({ name, sol }))
     describe(`action fetchPhotosRequest("${name}", 10)`, () => {
       it(`Создает запись в редьсере photos.${name} [10]: {isLoading: true, photos: [], isLoaded: false}`, () => {
